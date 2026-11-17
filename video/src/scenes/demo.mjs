@@ -64,7 +64,7 @@ function titleBlock(t) {
       <text y="150" font-family="'DejaVu Sans'" font-size="70" font-weight="700" letter-spacing="-1">${spans}</text>
       ${rect(120, 352, underline, 6, 'url(#sweep)', 3)}
       <text x="120" y="406" font-family="'DejaVu Sans'" font-size="26" fill="${P.muted}" opacity="${easeOutCubic(progress(t, 1.1, 1.9))}">
-        SVG kareler → FFmpeg → MP4 · lisans ücreti yok
+        Kare kare çizim, tek dosya film · lisans ücreti yok
       </text>
     </g>`;
 }
@@ -108,7 +108,7 @@ function pipelineBlock(t) {
   const dotX = startX + dot * (totalW - boxW) + boxW / 2;
   parts.push(circle(dotX, y - 18, 7, P.accent, `opacity="${fade * clamp(progress(t, 4.4, 4.8))}"`));
   parts.push(
-    `<text x="${meta.width / 2}" y="${y + 190}" font-family="'DejaVu Sans'" font-size="25" fill="${P.muted}" text-anchor="middle" opacity="${fade * easeOutCubic(progress(t, 5.0, 5.8))}">Tarayıcı yok · 2 çekirdekte bile kare kare deterministik</text>`,
+    `<text x="${meta.width / 2}" y="${y + 190}" font-family="'DejaVu Sans'" font-size="25" fill="${P.muted}" text-anchor="middle" opacity="${fade * easeOutCubic(progress(t, 5.0, 5.8))}">Tarayıcı yok · her kare aynı, iki çekirdekte bile hızlı</text>`,
   );
   return `<g opacity="${fade}">${parts.join('')}</g>`;
 }

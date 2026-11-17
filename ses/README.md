@@ -52,3 +52,19 @@ için fazlasıyla yeterli.
 - Ses her videoda aynı model dosyasıyla üretilir (`ses/piper/voices/*.onnx`).
 - Metin cümle cümle sentezlenir; hız/ton modelin kendi varsayılanıdır.
 - Video kodlaması: AAC 192 kbps. Ses dosyası asla mp3 32 kbps'e düşürülmez.
+
+## hukuk3 — konuşma senkronlu sahne
+
+`ses/hukuk3/` altında cümle cümle seslendirme var. `build_audio.py` bunları
+temizleyip birleştiriyor ve **zaman çizelgesini** üretiyor:
+
+```
+ses/hukuk3/sN.wav            -> ham TTS (voice-11)
+ses/hukuk3/build_audio.py    -> temizlik + birleştirme + timing
+ses/hukuk3/ses.wav           -> final ses
+video/src/scenes/hukuk3-timing.json  -> sahnenin okuduğu beat zamanları
+```
+
+Sahne `frame(t)` içinde bu beat'lere bakarak başlık, kart ve maskot ifadesini
+değiştirir. Yeni video için: metni cümlelere böl → `sN.wav` üret → betiği çalıştır
+→ `node src/render.mjs --scene hukuk3 --out x.mp4 --audio ../ses/hukuk3/ses.wav`.

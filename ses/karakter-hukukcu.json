@@ -1,0 +1,31 @@
+{
+  "karakter": "Genç hukukçu (18 yaş civarı)",
+  "voice_id": "voice-11",
+  "dil": "tr",
+  "olcum": {
+    "f0_medyan_Hz": 122.6,
+    "f0_p10_p90_Hz": [86.0, 193.9],
+    "tini_merkezi_Hz": 1576.6,
+    "ornek_kaynak": "ses/ham-hukuk.wav"
+  },
+  "kaynak_format": {
+    "dosya": "wav",
+    "ornek_hizi_Hz": 44100,
+    "bit_derinligi": 16,
+    "neden": "mp3 istenirse 24 kHz / 32 kbps geliyor, boguk ve islenmis duyuluyor"
+  },
+  "islem_zinciri": "highpass=f=85,equalizer=f=250:width_type=o:width=1.2:g=-2,equalizer=f=3500:width_type=o:width=1.4:g=2.5,acompressor=threshold=-18dB:ratio=3:attack=8:release=180,loudnorm=I=-16:TP=-1.5:LRA=9",
+  "hedef_ses_seviyesi_LUFS": -16,
+  "video_encode": "AAC 192 kbps",
+  "kullanim": [
+    "python: generate_speech(voice_id='voice-11', text=..., file_path='ses/ham-<konu>.wav')",
+    "ffmpeg -i ses/ham-<konu>.wav -af \"<islem_zinciri>\" -ar 44100 ses/karakter-<konu>.wav",
+    "cd video && node src/render.mjs --scene hukuk --out hukuk.mp4 --audio ../ses/karakter-<konu>.wav"
+  ],
+  "kurallar": [
+    "Ses her videoda ayni voice_id ile uretilir",
+    "Pitch / tinı oynatma yok - sadece temizlik zinciri",
+    "Metin tamamen Turkce; yabanci kelime telaffuzu aksan gibi duyuluyor",
+    "Cumleler kisa; virgul ve iki nokta ile dogal duraklama"
+  ]
+}

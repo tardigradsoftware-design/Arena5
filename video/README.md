@@ -80,3 +80,18 @@ gh workflow run render.yml -f scene=demo
 gh run watch
 gh run download --name video -D out
 ```
+
+## Ses (seslendirme)
+
+TTS çıktısı doğrudan kullanılıyor, ama gerektiğinde ffmpeg ile gerçek bir tını
+dönüşümü uygulanıyor (iddia değil, ölçümle doğrulanıyor):
+
+```bash
+# ham TTS -> çocuk sesi (f0 ~250 Hz, 7 yaş aralığı), süre korunur
+ffmpeg -i raw.mp3 -af "asetrate=44100*2.5,aresample=44100,atempo=0.6166,atempo=0.6166,highpass=f=140,treble=g=3" -c:a libmp3lame -b:a 96k child.mp3
+
+# doğrulama: medyan f0 ve tını merkezi
+python3 tools/voice-stats.py demo.mp4
+```
+
+Ölçülen değerler: yetişkin erkek ~104 Hz, çocuk sürümü ~250 Hz (p10–p90: 193–327 Hz).

@@ -95,3 +95,14 @@ python3 tools/voice-stats.py demo.mp4
 ```
 
 Ölçülen değerler: yetişkin erkek ~104 Hz, çocuk sürümü ~250 Hz (p10–p90: 193–327 Hz).
+
+### Ses kalitesi (önemli)
+
+TTS çıktısını **mp3 olarak istemeyin**: 24 kHz / 32 kbps geliyor ve boğuk,
+işlenmiş duyuluyor. `.wav` isteyin → 44.1 kHz / 16-bit. Video kodlaması zaten AAC
+192k olduğu için tekrar sıkıştırma kaybı da olmuyor.
+
+```bash
+# adayları aynı cümleyle, ses seviyesi eşitlenmiş tek dosyada karşılaştır
+python3 tools/voice-stats.py ../audio/aday-*.wav
+```

@@ -5,6 +5,11 @@ name: Render video
 # separate 4-vCPU machines and are stitched together with a stream copy.
 
 on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'video/**'
+      - '.github/workflows/render.yml'
   workflow_dispatch:
     inputs:
       scene:
@@ -45,12 +50,15 @@ jobs:
 
       - name: Render shard ${{ matrix.shard }} / 6
         working-directory: video
+        env:
+          SCENE: ${{ inputs.scene || 'demo' }}
+          DURATION: ${{ inputs.duration }}
         run: |
           node src/render.mjs \
-            --scene "${{ inputs.scene }}" \
+            --scene "$SCENE" \
             --shard ${{ matrix.shard }}/6 \
             --out "out/part-${{ matrix.shard }}.mp4" \
-            ${{ inputs.duration != '' && format('--duration {0}', inputs.duration) || '' }}
+            ${{ env.DURATION != '' && format('--duration {0}', env.DURATION) || '' }}
 
       - uses: actions/upload-artifact@v4
         with:
@@ -82,7 +90,7 @@ jobs:
       - name: Stitch shards
         working-directory: video
         env:
-          AUDIO: ${{ inputs.audio }}
+          AUDIO: ${{ inputs.audio || 'assets/voice-tr-14s.m4a' }}
         run: |
           set -euo pipefail
           ls -la out

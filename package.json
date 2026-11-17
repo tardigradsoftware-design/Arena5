@@ -1,0 +1,25 @@
+{
+  "name": "arena5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tardigradsoftware-design/Arena5.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tardigradsoftware-design/Arena5/issues"
+  },
+  "homepage": "https://github.com/tardigradsoftware-design/Arena5#readme",
+  "dependencies": {
+    "@expo-google-fonts/inter": "^0.4.2",
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "roboto-fontface": "^0.10.0"
+  }
+}

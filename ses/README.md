@@ -68,3 +68,12 @@ video/src/scenes/hukuk3-timing.json  -> sahnenin okuduğu beat zamanları
 Sahne `frame(t)` içinde bu beat'lere bakarak başlık, kart ve maskot ifadesini
 değiştirir. Yeni video için: metni cümlelere böl → `sN.wav` üret → betiği çalıştır
 → `node src/render.mjs --scene hukuk3 --out x.mp4 --audio ../ses/hukuk3/ses.wav`.
+
+## hukuk4 — "shorts" stili (karaoke altyazı + efekt)
+
+- `video/src/scenes/hukuk4.mjs`: kelime kelime vurgulanan karaoke altyazı, kısa
+  kanca başlığı, adım kartları (ikonlu), maskot punch-in, uyarı beat'inde
+  hafif sarsıntı, CTA balonu.
+- `ses/hukuk3/mix_sfx.py`: whoosh / pop / ding efektlerini numpy ile miksler
+  (`ses/hukuk3/ses-sfx.wav`). Eski ffmpeg'de `amix normalize` olmadığı için
+  karıştırma ffmpeg yerine doğrudan örnek toplama ile yapılıyor.
